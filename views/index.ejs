@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/ac125c723e.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#convert").click(function(){
+                $.ajax({
+                    url : '/convert',
+                    type : 'POST',
+                    data : { ibatisXml : $("#ibatisXml").val() },
+                    success : function( result ){
+                        $("#mybatisXml").val(result.targetText);
+                    }
+                })
+            });
+        });
+    </script>
+  </head>
+  <body>
+        <div class="wrap">
+            <header>
+                <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+                      <a class="navbar-brand" href="#"><i class="fa fa-code-fork"></i>IBatis2Mybatis v 1.0</a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                       </button>
+                </nav>
+            </header>
+
+            <section class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <textarea name="ibatisXml" id="ibatisXml" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="text-center">
+                            <button class="btn btn-primary" id="convert"><i class="fa fa-mail-forward"></i>변환</button>
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <textarea name="mybatisXml" id="mybatisXml" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    전체 컨버팅이 아니므로 변환 후 한번 확인 필요 <br>
+                    XML DTD 및 동적SQL 사용시 태그들은 수동전환 필요 추후 업데이트 <br>
+                    변환되는 사항 : ## -> #{} , $$ -> ${} , parameterClass -> parameterType , resultClass -> resultType <br>
+                                sqlMap -> mapper
+                </div>
+            </section>
+
+        </div>
+
+  </body>
+</html>

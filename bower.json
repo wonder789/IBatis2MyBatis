@@ -1,0 +1,20 @@
+{
+  "name": "ibatis2mybatis",
+  "description": "",
+  "main": "",
+  "authors": [
+    "LimHoSung <wonder789@naver.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
